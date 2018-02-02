@@ -1,0 +1,1390 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Assignment1test}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Part A Cleaning and EDA}\label{part-a-cleaning-and-eda}
+
+\begin{itemize}
+\tightlist
+\item
+  Data cleaning
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Are there missing values?
+
+    \begin{itemize}
+    \tightlist
+    \item
+      No, I use .isnull().value\_counts() to check it.
+    \end{itemize}
+  \item
+    Are there inappropraite values?
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Yes, these columns have at least one 0 value
+    \item
+      the Economy (GDP per Capita)
+    \item
+      Family
+    \item
+      Health (Life Expectancy)\\
+    \item
+      Freedom
+    \item
+      Trust (Government Corruption)
+    \item
+      Generosity
+    \end{itemize}
+  \item
+    Remove or impute any bad data.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      I write a piece of code to replace 0 value with the region's mean
+    \end{itemize}
+  \end{itemize}
+\item
+  Answer the following questions for the data in each column:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    How is the data distributed?
+
+    \begin{itemize}
+    \tightlist
+    \item
+      see the plots and data description
+    \end{itemize}
+  \item
+    What are the summary statistics?
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Write below
+    \end{itemize}
+  \item
+    Are there anomalies/outliers?
+
+    \begin{itemize}
+    \tightlist
+    \item
+      According to the box-plot there are lots of outliers
+    \end{itemize}
+  \end{itemize}
+\item
+  Plot each colmun as appropriate for the data type:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Write a summary of what the plot tells you.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      see the plot summary
+    \end{itemize}
+  \end{itemize}
+\item
+  Are any of the columns correlated?
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The happiness score has positive linear relationship with other
+    parameters
+  \item
+    Economy fmaily and health also have positive linear relationship
+    with each other
+  \item
+    Generosity, Dystopia Residual, Trust (Government Corruption) is not
+    correlated with any other factors.
+  \end{itemize}
+\end{itemize}
+
+    \subsection{Summary statistics}\label{summary-statistics}
+
+\begin{itemize}
+\tightlist
+\item
+  The summary statistics show me the basic data statistic
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{stats}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         \PY{k+kn}{import} \PY{n+nn}{warnings}
+         \PY{k+kn}{import} \PY{n+nn}{random}
+         \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{18}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{whr} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./world\PYZhy{}happiness\PYZhy{}report/whr.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{whr}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}        Country          Region  Happiness Rank  Happiness Score  \textbackslash{}
+        0      Denmark  Western Europe               1            7.526   
+        1  Switzerland  Western Europe               2            7.509   
+        2      Iceland  Western Europe               3            7.501   
+        3       Norway  Western Europe               4            7.498   
+        4      Finland  Western Europe               5            7.413   
+        
+           Economy (GDP per Capita)   Family  Health (Life Expectancy)  Freedom  \textbackslash{}
+        0                   1.44178  1.16374                   0.79504  0.57941   
+        1                   1.52733  1.14524                   0.86303  0.58557   
+        2                   1.42666  1.18326                   0.86733  0.56624   
+        3                   1.57744  1.12690                   0.79579  0.59609   
+        4                   1.40598  1.13464                   0.81091  0.57104   
+        
+           Trust (Government Corruption)  Generosity  Dystopia Residual  Year  \textbackslash{}
+        0                        0.44453     0.36171            2.73939  2016   
+        1                        0.41203     0.28083            2.69463  2016   
+        2                        0.14975     0.47678            2.83137  2016   
+        3                        0.35776     0.37895            2.66465  2016   
+        4                        0.41004     0.25492            2.82596  2016   
+        
+           Region Code  
+        0            1  
+        1            1  
+        2            1  
+        3            1  
+        4            1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{whr}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}        Happiness Rank  Happiness Score  Economy (GDP per Capita)      Family  \textbackslash{}
+        count      315.000000       315.000000                315.000000  315.000000   
+        mean        79.238095         5.378949                  0.899837    0.892647   
+        std         45.538922         1.141531                  0.410780    0.286718   
+        min          1.000000         2.839000                  0.000000    0.000000   
+        25\%         40.000000         4.510000                  0.594900    0.739880   
+        50\%         79.000000         5.286000                  0.973060    0.937930   
+        75\%        118.500000         6.269000                  1.229000    1.087360   
+        max        158.000000         7.587000                  1.824270    1.402230   
+        
+               Health (Life Expectancy)     Freedom  Trust (Government Corruption)  \textbackslash{}
+        count                315.000000  315.000000                     315.000000   
+        mean                   0.594054    0.399896                       0.140532   
+        std                    0.240790    0.150684                       0.115490   
+        min                    0.000000    0.000000                       0.000000   
+        25\%                    0.419645    0.295890                       0.061315   
+        50\%                    0.640450    0.413190                       0.106130   
+        75\%                    0.787640    0.516730                       0.178610   
+        max                    1.025250    0.669730                       0.551910   
+        
+               Generosity  Dystopia Residual         Year  Region Code  
+        count  315.000000         315.000000   315.000000    315.00000  
+        mean     0.239957           2.212032  2015.498413      6.08254  
+        std      0.130077           0.558728     0.500793      2.79094  
+        min      0.000000           0.328580  2015.000000      1.00000  
+        25\%      0.151430           1.884135  2015.000000      4.00000  
+        50\%      0.218540           2.211260  2015.000000      7.00000  
+        75\%      0.311450           2.563470  2016.000000      9.00000  
+        max      0.819710           3.837720  2016.000000     10.00000  
+\end{Verbatim}
+            
+    \begin{itemize}
+\tightlist
+\item
+  check missing value
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Happiness Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} False    315
+        Name: Happiness Score, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Economy (GDP per Capita)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} False    315
+        Name: Economy (GDP per Capita), dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Family}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} False    315
+        Name: Family, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Freedom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} False    315
+        Name: Freedom, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trust (Government Corruption)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} False    315
+        Name: Trust (Government Corruption), dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Generosity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} False    315
+        Name: Generosity, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dystopia Residual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} False    315
+         Name: Dystopia Residual, dtype: int64
+\end{Verbatim}
+            
+    \begin{itemize}
+\tightlist
+\item
+  replace 0 value with the region's mean
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{pmean} \PY{o}{=} \PY{n}{whr}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Economy (GDP per Capita)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{errors} \PY{o}{=} \PY{n}{whr}\PY{p}{[}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Economy (GDP per Capita)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{errors}\PY{o}{.}\PY{n}{index}\PY{p}{:}
+             \PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Economy (GDP per Capita)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{=} \PY{n}{pmean}\PY{p}{[}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}
+         \PY{n}{pmean} \PY{o}{=} \PY{n}{whr}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Family}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{errors} \PY{o}{=} \PY{n}{whr}\PY{p}{[}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Family}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{errors}\PY{o}{.}\PY{n}{index}\PY{p}{:}
+             \PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Family}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{=} \PY{n}{pmean}\PY{p}{[}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}
+         \PY{n}{pmean} \PY{o}{=} \PY{n}{whr}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Freedom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{errors} \PY{o}{=} \PY{n}{whr}\PY{p}{[}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Freedom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{errors}\PY{o}{.}\PY{n}{index}\PY{p}{:}
+             \PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Freedom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{=} \PY{n}{pmean}\PY{p}{[}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}
+         \PY{n}{pmean} \PY{o}{=} \PY{n}{whr}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Generosity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{errors} \PY{o}{=} \PY{n}{whr}\PY{p}{[}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Generosity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{errors}\PY{o}{.}\PY{n}{index}\PY{p}{:}
+             \PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Generosity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{=} \PY{n}{pmean}\PY{p}{[}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}
+         \PY{n}{pmean} \PY{o}{=} \PY{n}{whr}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trust (Government Corruption)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{errors} \PY{o}{=} \PY{n}{whr}\PY{p}{[}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trust (Government Corruption)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{errors}\PY{o}{.}\PY{n}{index}\PY{p}{:}
+             \PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trust (Government Corruption)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{=} \PY{n}{pmean}\PY{p}{[}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}
+         \PY{n}{pmean} \PY{o}{=} \PY{n}{whr}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Health (Life Expectancy)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{errors} \PY{o}{=} \PY{n}{whr}\PY{p}{[}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Health (Life Expectancy)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{errors}\PY{o}{.}\PY{n}{index}\PY{p}{:}
+             \PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Health (Life Expectancy)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{=} \PY{n}{pmean}\PY{p}{[}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{whr}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:}        Happiness Rank  Happiness Score  Economy (GDP per Capita)      Family  \textbackslash{}
+         count      315.000000       315.000000                315.000000  315.000000   
+         mean        79.238095         5.378949                  0.902543    0.897118   
+         std         45.538922         1.141531                  0.406207    0.278097   
+         min          1.000000         2.839000                  0.015300    0.104190   
+         25\%         40.000000         4.510000                  0.594900    0.739880   
+         50\%         79.000000         5.286000                  0.973060    0.937930   
+         75\%        118.500000         6.269000                  1.229000    1.087360   
+         max        158.000000         7.587000                  1.824270    1.402230   
+         
+                Health (Life Expectancy)     Freedom  Trust (Government Corruption)  \textbackslash{}
+         count                315.000000  315.000000                     315.000000   
+         mean                   0.595716    0.402047                       0.141285   
+         std                    0.237557    0.147330                       0.114982   
+         min                    0.038240    0.005890                       0.002270   
+         25\%                    0.419645    0.303100                       0.061890   
+         50\%                    0.640450    0.413190                       0.106130   
+         75\%                    0.787640    0.516730                       0.178610   
+         max                    1.025250    0.669730                       0.551910   
+         
+                Generosity  Dystopia Residual         Year  Region Code  
+         count  315.000000         315.000000   315.000000    315.00000  
+         mean     0.241883           2.212032  2015.498413      6.08254  
+         std      0.128745           0.558728     0.500793      2.79094  
+         min      0.001990           0.328580  2015.000000      1.00000  
+         25\%      0.155415           1.884135  2015.000000      4.00000  
+         50\%      0.220400           2.211260  2015.000000      7.00000  
+         75\%      0.311450           2.563470  2016.000000      9.00000  
+         max      0.819710           3.837720  2016.000000     10.00000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{whr}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 315 entries, 0 to 314
+Data columns (total 13 columns):
+Country                          315 non-null object
+Region                           315 non-null object
+Happiness Rank                   315 non-null int64
+Happiness Score                  315 non-null float64
+Economy (GDP per Capita)         315 non-null float64
+Family                           315 non-null float64
+Health (Life Expectancy)         315 non-null float64
+Freedom                          315 non-null float64
+Trust (Government Corruption)    315 non-null float64
+Generosity                       315 non-null float64
+Dystopia Residual                315 non-null float64
+Year                             315 non-null int64
+Region Code                      315 non-null int64
+dtypes: float64(8), int64(3), object(2)
+memory usage: 32.1+ KB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{whr}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} (315, 13)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{whr}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:}                                 Dystopia Residual                      \textbackslash{}
+                                                     count      mean       std   
+         Region                                                                  
+         Australia and New Zealand                     4.0  2.388185  0.144764   
+         Central and Eastern Europe                   58.0  2.145811  0.466042   
+         Eastern Asia                                 12.0  1.791144  0.597087   
+         Latin America and Caribbean                  46.0  2.744404  0.492645   
+         Middle East and Northern Africa              39.0  2.124539  0.578664   
+         North America                                 4.0  2.598635  0.138298   
+         Southeastern Asia                            18.0  1.893965  0.400703   
+         Southern Asia                                14.0  2.093435  0.706105   
+         Sub-Saharan Africa                           78.0  2.091293  0.547802   
+         Western Europe                               42.0  2.268381  0.379721   
+         
+                                                                                 \textbackslash{}
+                                              min       25\%       50\%       75\%   
+         Region                                                                   
+         Australia and New Zealand        2.26425  2.265907  2.370995  2.493272   
+         Central and Eastern Europe       0.89991  1.869958  2.204470  2.432632   
+         Eastern Asia                     0.65429  1.488793  1.833120  2.245643   
+         Latin America and Caribbean      1.21305  2.360405  2.823810  3.077422   
+         Middle East and Northern Africa  0.32858  1.878150  2.090660  2.417865   
+         North America                    2.45176  2.495522  2.607480  2.710592   
+         Southeastern Asia                0.98195  1.741893  1.913605  2.172890   
+         Southern Asia                    0.67108  1.859895  2.162950  2.469987   
+         Sub-Saharan Africa               0.67042  1.787395  2.105425  2.447245   
+         Western Europe                   1.26462  1.999035  2.360185  2.543805   
+         
+                                                  Economy (GDP per Capita)            \textbackslash{}
+                                              max                    count      mean   
+         Region                                                                        
+         Australia and New Zealand        2.54650                      4.0  1.347212   
+         Central and Eastern Europe       3.38007                     58.0  0.994988   
+         Eastern Asia                     2.61523                     12.0  1.214546   
+         Latin America and Caribbean      3.60214                     46.0  0.937647   
+         Middle East and Northern Africa  3.40904                     39.0  1.102221   
+         North America                    2.72782                      4.0  1.417228   
+         Southeastern Asia                2.57960                     18.0  0.842718   
+         Southern Asia                    3.18286                     14.0  0.610579   
+         Sub-Saharan Africa               3.83772                     78.0  0.437122   
+         Western Europe                   2.83137                     42.0  1.357826   
+         
+                                           {\ldots}   Trust (Government Corruption)  \textbackslash{}
+                                           {\ldots}                             75\%   
+         Region                            {\ldots}                                   
+         Australia and New Zealand         {\ldots}                        0.421585   
+         Central and Eastern Europe        {\ldots}                        0.133120   
+         Eastern Asia                      {\ldots}                        0.182913   
+         Latin America and Caribbean       {\ldots}                        0.142170   
+         Middle East and Northern Africa   {\ldots}                        0.246390   
+         North America                     {\ldots}                        0.317360   
+         Southeastern Asia                 {\ldots}                        0.199408   
+         Southern Asia                     {\ldots}                        0.125795   
+         Sub-Saharan Africa                {\ldots}                        0.129692   
+         Western Europe                    {\ldots}                        0.356642   
+         
+                                                   Year                                 \textbackslash{}
+                                              max count         mean       std     min   
+         Region                                                                          
+         Australia and New Zealand        0.42922   4.0  2015.500000  0.577350  2015.0   
+         Central and Eastern Europe       0.38331  58.0  2015.500000  0.504367  2015.0   
+         Eastern Asia                     0.37124  12.0  2015.500000  0.522233  2015.0   
+         Latin America and Caribbean      0.24558  46.0  2015.521739  0.505047  2015.0   
+         Middle East and Northern Africa  0.52208  39.0  2015.487179  0.506370  2015.0   
+         North America                    0.32957   4.0  2015.500000  0.577350  2015.0   
+         Southeastern Asia                0.49210  18.0  2015.500000  0.514496  2015.0   
+         Southern Asia                    0.16160  14.0  2015.500000  0.518875  2015.0   
+         Sub-Saharan Africa               0.55191  78.0  2015.487179  0.503071  2015.0   
+         Western Europe                   0.48357  42.0  2015.500000  0.506061  2015.0   
+         
+                                                                          
+                                             25\%     50\%     75\%     max  
+         Region                                                           
+         Australia and New Zealand        2015.0  2015.5  2016.0  2016.0  
+         Central and Eastern Europe       2015.0  2015.5  2016.0  2016.0  
+         Eastern Asia                     2015.0  2015.5  2016.0  2016.0  
+         Latin America and Caribbean      2015.0  2016.0  2016.0  2016.0  
+         Middle East and Northern Africa  2015.0  2015.0  2016.0  2016.0  
+         North America                    2015.0  2015.5  2016.0  2016.0  
+         Southeastern Asia                2015.0  2015.5  2016.0  2016.0  
+         Southern Asia                    2015.0  2015.5  2016.0  2016.0  
+         Sub-Saharan Africa               2015.0  2015.0  2016.0  2016.0  
+         Western Europe                   2015.0  2015.5  2016.0  2016.0  
+         
+         [10 rows x 88 columns]
+\end{Verbatim}
+            
+    \subsection{Box-Plot}\label{box-plot}
+
+\begin{itemize}
+\tightlist
+\item
+  The plot show the difference Region's happiness score between 2015 and
+  2016. Also provide basic statistics for the data. And show the
+  underlying outliers(4 individual points)
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{22}\PY{p}{,} \PY{l+m+mi}{13}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Region}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{whr}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{font\PYZus{}scale}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} (array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]), <a list of 10 Text xticklabel objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Histograms}\label{histograms}
+
+\begin{itemize}
+\tightlist
+\item
+  Density estimate with every column's data distribution
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Happiness Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x18576d87550>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Economy (GDP per Capita)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x18576d87588>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Family}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x18576daa1d0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Health (Life Expectancy)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x18576837cc0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Freedom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x185768c7828>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trust (Government Corruption)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1857693f4a8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Generosity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1857699e240>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{whr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dystopia Residual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x18576a60860>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Strip plot}\label{strip-plot}
+
+\begin{itemize}
+\tightlist
+\item
+  show the Region's happiness score distribution
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{stripplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Region}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{whr}\PY{p}{,} \PY{n}{jitter}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{font\PYZus{}scale}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} (array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]), <a list of 10 Text xticklabel objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{stripplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Region}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Rank}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{whr}\PY{p}{,} \PY{n}{jitter}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{font\PYZus{}scale}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} (array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]), <a list of 10 Text xticklabel objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Swarm plot}\label{swarm-plot}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{swarmplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Region}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{whr}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{font\PYZus{}scale}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} (array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]), <a list of 10 Text xticklabel objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Violin plots}\label{violin-plots}
+
+\begin{itemize}
+\tightlist
+\item
+  show both Region's happiness score distribution and density
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{violinplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Region}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{whr}\PY{p}{,}\PY{n}{bw}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{scale}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{count}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{scale\PYZus{}hue}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{font\PYZus{}scale}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} (array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]), <a list of 10 Text xticklabel objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Line charts}\label{line-charts}
+
+\begin{itemize}
+\tightlist
+\item
+  show the relationship between columns and happiness score
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{regplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Family}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{whr}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x185786db908>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{regplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Health (Life Expectancy)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{whr}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1857872b630>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{regplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Freedom}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{whr}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1857899a710>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{regplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Trust (Government Corruption)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{whr}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x185789714a8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{regplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Generosity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{whr}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x18579a41b70>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{regplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Dystopia Residual}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{whr}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x18579a0b400>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{lmplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Economy (GDP per Capita)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{whr}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} <seaborn.axisgrid.FacetGrid at 0x18579aca0f0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Pairwise scatterplots}\label{pairwise-scatterplots}
+
+\begin{itemize}
+\tightlist
+\item
+  The happiness score has positive linear relationship with other
+  parameters
+\item
+  Economy fmaily and health also have positive linear relationship with
+  each other
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{whrsub} \PY{o}{=} \PY{n}{whr}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{whrsub}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} <seaborn.axisgrid.PairGrid at 0x18579aa9be0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{whrsub} \PY{o}{=} \PY{n}{whr}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{]}
+         \PY{n}{whrsub}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Happiness Rank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trust (Government Corruption)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Generosity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dystopia Residual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{whrsub}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Year}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} <seaborn.axisgrid.PairGrid at 0x1857f561fd0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{corrmat} \PY{o}{=} \PY{n}{whr}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{corrmat}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{square}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x18502ad9588>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  Neuralnetworks with backpropagation to predict the country's region
+\end{itemize}
+
+    \begin{itemize}
+\tightlist
+\item
+  define util function
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}133}]:} \PY{k}{def} \PY{n+nf}{rand}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{p}{(}\PY{n}{b} \PY{o}{\PYZhy{}} \PY{n}{a}\PY{p}{)} \PY{o}{*} \PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{n}{a}
+          
+          \PY{k}{def} \PY{n+nf}{make\PYZus{}matrix}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{n}\PY{p}{,} \PY{n}{fill}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{)}\PY{p}{:}
+              \PY{n}{mat} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{mat}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{fill}\PY{p}{]} \PY{o}{*} \PY{n}{n}\PY{p}{)}
+              \PY{k}{return} \PY{n}{mat}
+          
+          \PY{k}{def} \PY{n+nf}{sigmoid}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{l+m+mf}{1.0} \PY{o}{/} \PY{p}{(}\PY{l+m+mf}{1.0} \PY{o}{+} \PY{n}{math}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+          
+          \PY{k}{def} \PY{n+nf}{sigmoid\PYZus{}derivative}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{n}{x} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{x}\PY{p}{)}
+          
+          \PY{k}{def} \PY{n+nf}{result\PYZus{}list}\PY{p}{(}\PY{n}{result}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{}resultlist = []}
+              \PY{n}{max\PYZus{}item} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{result}\PY{p}{)}
+              \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{result}\PY{p}{:}
+                  \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                  \PY{k}{if} \PY{n}{item} \PY{o}{==} \PY{n}{max\PYZus{}item}\PY{p}{:}
+                      \PY{n}{m} \PY{o}{=} \PY{n}{i}
+              \PY{c+c1}{\PYZsh{}resultlist.append(m)}
+              \PY{k}{return} \PY{n}{m}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  Neural network with BP algorithms
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}136}]:} \PY{k}{class} \PY{n+nc}{BPNeuralNetwork}\PY{p}{:}
+              \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}n} \PY{o}{=} \PY{l+m+mi}{0}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}n} \PY{o}{=} \PY{l+m+mi}{0}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}n} \PY{o}{=} \PY{l+m+mi}{0}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}cells} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}cells} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}cells} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}weights} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}weights} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}correction} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}correction} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+              \PY{k}{def} \PY{n+nf}{setup}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{ni}\PY{p}{,} \PY{n}{nh}\PY{p}{,} \PY{n}{no}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}n} \PY{o}{=} \PY{n}{ni} \PY{o}{+} \PY{l+m+mi}{1}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}n} \PY{o}{=} \PY{n}{nh}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}n} \PY{o}{=} \PY{n}{no}
+                  \PY{c+c1}{\PYZsh{} init cells}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}cells} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}n}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}cells} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}n}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}cells} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}n}
+                  \PY{c+c1}{\PYZsh{} init weights}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}weights} \PY{o}{=} \PY{n}{make\PYZus{}matrix}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}n}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}n}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}weights} \PY{o}{=} \PY{n}{make\PYZus{}matrix}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}n}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}n}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} random activate}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{for} \PY{n}{h} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}weights}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{h}\PY{p}{]} \PY{o}{=} \PY{n}{rand}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{h} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{for} \PY{n}{o} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}weights}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{o}\PY{p}{]} \PY{o}{=} \PY{n}{rand}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{2.0}\PY{p}{,} \PY{l+m+mf}{2.0}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} init correction matrix}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}correction} \PY{o}{=} \PY{n}{make\PYZus{}matrix}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}n}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}n}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}correction} \PY{o}{=} \PY{n}{make\PYZus{}matrix}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}n}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}n}\PY{p}{)}
+          
+              \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs}\PY{p}{)}\PY{p}{:}
+                  \PY{c+c1}{\PYZsh{} activate input layer}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}n} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                      \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}cells}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{inputs}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                  \PY{c+c1}{\PYZsh{} activate hidden layer}
+                  \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{total} \PY{o}{=} \PY{l+m+mf}{0.0}
+                      \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{total} \PY{o}{+}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}cells}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}weights}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+                      \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}cells}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{sigmoid}\PY{p}{(}\PY{n}{total}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} activate output layer}
+                  \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{total} \PY{o}{=} \PY{l+m+mf}{0.0}
+                      \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{total} \PY{o}{+}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}cells}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}weights}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{n}{k}\PY{p}{]}
+                      \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}cells}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{sigmoid}\PY{p}{(}\PY{n}{total}\PY{p}{)}
+                  \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}cells}\PY{p}{[}\PY{p}{:}\PY{p}{]}
+          
+              \PY{k}{def} \PY{n+nf}{back\PYZus{}propagate}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{case}\PY{p}{,} \PY{n}{label}\PY{p}{,} \PY{n}{learn}\PY{p}{,} \PY{n}{correct}\PY{p}{)}\PY{p}{:}
+                  \PY{c+c1}{\PYZsh{} feed forward}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{case}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} get output layer error}
+                  \PY{n}{output\PYZus{}deltas} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}n}
+                  \PY{k}{for} \PY{n}{o} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{error} \PY{o}{=} \PY{n}{label}\PY{p}{[}\PY{n}{o}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}cells}\PY{p}{[}\PY{n}{o}\PY{p}{]}
+                      \PY{n}{output\PYZus{}deltas}\PY{p}{[}\PY{n}{o}\PY{p}{]} \PY{o}{=} \PY{n}{sigmoid\PYZus{}derivative}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}cells}\PY{p}{[}\PY{n}{o}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{error}
+                  \PY{c+c1}{\PYZsh{} get hidden layer error}
+                  \PY{n}{hidden\PYZus{}deltas} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}n}
+                  \PY{k}{for} \PY{n}{h} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{error} \PY{o}{=} \PY{l+m+mf}{0.0}
+                      \PY{k}{for} \PY{n}{o} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{error} \PY{o}{+}\PY{o}{=} \PY{n}{output\PYZus{}deltas}\PY{p}{[}\PY{n}{o}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}weights}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{o}\PY{p}{]}
+                      \PY{n}{hidden\PYZus{}deltas}\PY{p}{[}\PY{n}{h}\PY{p}{]} \PY{o}{=} \PY{n}{sigmoid\PYZus{}derivative}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}cells}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{error}
+                  \PY{c+c1}{\PYZsh{} update output weights}
+                  \PY{k}{for} \PY{n}{h} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{for} \PY{n}{o} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{change} \PY{o}{=} \PY{n}{output\PYZus{}deltas}\PY{p}{[}\PY{n}{o}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}cells}\PY{p}{[}\PY{n}{h}\PY{p}{]}
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}weights}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{o}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{learn} \PY{o}{*} \PY{n}{change} \PY{o}{+} \PY{n}{correct} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}correction}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{o}\PY{p}{]}
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}correction}\PY{p}{[}\PY{n}{h}\PY{p}{]}\PY{p}{[}\PY{n}{o}\PY{p}{]} \PY{o}{=} \PY{n}{change}
+                  \PY{c+c1}{\PYZsh{} update input weights}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{for} \PY{n}{h} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{hidden\PYZus{}n}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{change} \PY{o}{=} \PY{n}{hidden\PYZus{}deltas}\PY{p}{[}\PY{n}{h}\PY{p}{]} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}cells}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}weights}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{h}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{learn} \PY{o}{*} \PY{n}{change} \PY{o}{+} \PY{n}{correct} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}correction}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{h}\PY{p}{]}
+                          \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}correction}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{h}\PY{p}{]} \PY{o}{=} \PY{n}{change}
+                  \PY{c+c1}{\PYZsh{} get global error}
+                  \PY{n}{error} \PY{o}{=} \PY{l+m+mf}{0.0}
+                  \PY{k}{for} \PY{n}{o} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{label}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{error} \PY{o}{+}\PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{p}{(}\PY{n}{label}\PY{p}{[}\PY{n}{o}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{output\PYZus{}cells}\PY{p}{[}\PY{n}{o}\PY{p}{]}\PY{p}{)} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}
+                  \PY{k}{return} \PY{n}{error}
+          
+              \PY{k}{def} \PY{n+nf}{train}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{cases}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{limit}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{learn}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{n}{correct}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{limit}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{error} \PY{o}{=} \PY{l+m+mf}{0.0}
+                      \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{cases}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{label} \PY{o}{=} \PY{n}{labels}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                          \PY{n}{case} \PY{o}{=} \PY{n}{cases}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                          \PY{n}{error} \PY{o}{+}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{back\PYZus{}propagate}\PY{p}{(}\PY{n}{case}\PY{p}{,} \PY{n}{label}\PY{p}{,} \PY{n}{learn}\PY{p}{,} \PY{n}{correct}\PY{p}{)}
+          
+              \PY{k}{def} \PY{n+nf}{test}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{traindata}\PY{p}{,} \PY{n}{result}\PY{p}{,} \PY{n}{testcases}\PY{p}{,}\PY{n}{testresult}\PY{p}{,} \PY{n}{ni}\PY{p}{,} \PY{n}{nh}\PY{p}{,} \PY{n}{no}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{setup}\PY{p}{(}\PY{n}{ni}\PY{p}{,} \PY{n}{nh}\PY{p}{,} \PY{n}{no}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{traindata}\PY{p}{,} \PY{n}{result}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{)}
+                  \PY{n}{testout} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                  \PY{n}{count} \PY{o}{=} \PY{l+m+mf}{0.0}
+                  \PY{n}{error} \PY{o}{=} \PY{l+m+mf}{0.0}
+                  \PY{k}{for} \PY{n}{case} \PY{o+ow}{in} \PY{n}{testcases}\PY{p}{:}
+                      \PY{c+c1}{\PYZsh{}print(result\PYZus{}list(self.predict(case)))}
+                      \PY{c+c1}{\PYZsh{}print(self.predict(case))}
+                      \PY{n}{testout}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{result\PYZus{}list}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{case}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{testout}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{count} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                      \PY{k}{if} \PY{n}{testout}\PY{p}{[}\PY{n}{index}\PY{p}{]} \PY{o}{!=} \PY{n}{testresult}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{:}
+                          \PY{n}{error} \PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                  \PY{n}{accuracy} \PY{o}{=} \PY{p}{(}\PY{n}{count} \PY{o}{\PYZhy{}} \PY{n}{error}\PY{p}{)}\PY{o}{/}\PY{n}{count}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of test: }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{count}\PY{p}{)}\PY{p}{)}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of error: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{error}\PY{p}{)}\PY{p}{)}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accuracy: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{accuracy}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{return} \PY{n}{accuracy}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  encode the 10 results and generate traindata(2015+2016 data) and
+  testdata(2017 data)
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}139}]:} \PY{n}{whrcp} \PY{o}{=} \PY{n}{whr}
+          \PY{n}{traininput} \PY{o}{=} \PY{n}{whrcp}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Happiness Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dystopia Residual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+          \PY{n}{trainresult} \PY{o}{=} \PY{n}{whrcp}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+          \PY{n}{resultx} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{res} \PY{o+ow}{in} \PY{n}{trainresult}\PY{p}{:}
+              \PY{n}{restmp} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{k}{if} \PY{n}{res} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                  \PY{n}{restmp} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{k}{elif} \PY{n}{res} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{:}
+                  \PY{n}{restmp} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{k}{elif} \PY{n}{res} \PY{o}{==} \PY{l+m+mi}{3}\PY{p}{:}
+                  \PY{n}{restmp} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{k}{elif} \PY{n}{res} \PY{o}{==} \PY{l+m+mi}{4}\PY{p}{:}
+                  \PY{n}{restmp} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{k}{elif} \PY{n}{res} \PY{o}{==} \PY{l+m+mi}{5}\PY{p}{:}
+                  \PY{n}{restmp} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{k}{elif} \PY{n}{res} \PY{o}{==} \PY{l+m+mi}{6}\PY{p}{:}
+                  \PY{n}{restmp} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{k}{elif} \PY{n}{res} \PY{o}{==} \PY{l+m+mi}{7}\PY{p}{:}
+                  \PY{n}{restmp} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{k}{elif} \PY{n}{res} \PY{o}{==} \PY{l+m+mi}{8}\PY{p}{:}
+                  \PY{n}{restmp} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{k}{elif} \PY{n}{res} \PY{o}{==} \PY{l+m+mi}{9}\PY{p}{:}
+                  \PY{n}{restmp} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{k}{elif} \PY{n}{res} \PY{o}{==} \PY{l+m+mi}{10}\PY{p}{:}
+                  \PY{n}{restmp} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+              \PY{n}{resultx}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{restmp}\PY{p}{)}
+          \PY{n}{whr2017} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./world\PYZhy{}happiness\PYZhy{}report/2017.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{testinput} \PY{o}{=} \PY{n}{whr2017}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Happiness.Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dystopia.Residual}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+          \PY{n}{testresult} \PY{o}{=} \PY{n}{whr2017}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region Code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+    \begin{itemize}
+\tightlist
+\item
+  Start the NeuralNetwork
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}141}]:} \PY{n}{net} \PY{o}{=} \PY{n}{BPNeuralNetwork}\PY{p}{(}\PY{p}{)}
+          \PY{n}{output} \PY{o}{=} \PY{n}{net}\PY{o}{.}\PY{n}{test}\PY{p}{(}\PY{n}{traininput}\PY{p}{,}\PY{n}{resultx}\PY{p}{,}\PY{n}{testinput}\PY{p}{,}\PY{n}{testresult}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of test: 155.0
+Number of error: 68.0
+Accuracy: 0.5612903225806452
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
